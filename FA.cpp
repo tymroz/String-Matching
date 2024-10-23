@@ -1,32 +1,47 @@
 #include <iostream>
+#include <vector>
+#include <string>
+#include <fstream>
 
-void Finnite_Automata_Matcher(text, transition_function, pattern_length) {
-    n = text.length
-    int q = 0
-    for(int i = 0; i <= n; i++) {
-        q = transition_function(q, text[i]);
-        if(q == m) {
-            std::cout << "Pattern occurs with shift" << i - m << std::endl;
+std::vector<std::vector<int>> Compute_Transition_Function(const std::string& pattern) {
+    int m = pattern.size();
+    std::vector<std::vector<int>> transitions(m+1, std::vector<int>(26, 0));
+    transitions[0][pattern[0] - 'a'] = 1;
+
+    int q = 0;
+    for (int i = 1; i <= m; i++) {
+        for (char c = 'a'; c <= 'z'; c++) {
+            transitions[i][c - 'a'] = transitions[q][c - 'a'];
         }
+        transitions[i][pattern[i] - 'a'] = i + 1;
+        q = transitions[q][pattern[i] - 'a'];
     }
+
+    return transitions;
 }
 
-int Compute_Transition_Function (pattern, alphabet) {
-    m = pattern.length
-    for(int q = 0; q <=m; q++) {
-        for(char a : alphabet) {
-            k = min(m+1, q+2)
-            while(Pk is suffix of Pqa) {
-                k = k - 1
-            }
+void Finnite_Automata_Matcher(const std::string& text, const std::vector<std::vector<int>>& transitions) {
+    int m = transitions.size() - 1;
+    int q = 0;
+    for (int i = 0; i < text.size(); i++) {
+        q = transitions[q][text[i] - 'a'];
+        if (q == m) {
+            std::cout << "Wzorzec znaleziono na pozycji: " << i - m + 1 << std::endl;
         }
-        transition_function(q, a) = k
     }
-
-    return transition_function
 }
 
 int main(int argc, char* argv[]) {
-    
+    std::string pattern = argv[1];
+    std::string text;
+
+    std::ifstream input_file(argv[2]);
+
+    input_file >> text;
+    input_file.close();
+
+    std::vector<std::vector<int>> automaton = Compute_Transition_Function(pattern);
+    Finnite_Automata_Matcher(text, automaton);
+
     return 0;
 }
