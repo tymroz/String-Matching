@@ -3,6 +3,11 @@
 #include <string>
 #include <fstream>
 
+/*
+autor: Tymoteusz Roźmiarek
+zrodla: Cormen T.H., Leiserson Ch.E., Rivest R.L.: Wprowadzenie do algorytmów
+*/
+
 std::vector<int> Compute_Prefix_Function(const std::string& pattern) {
     int m = pattern.length();
     std::vector<int> pi(m);
