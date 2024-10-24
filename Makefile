@@ -16,38 +16,28 @@ $(FA_TARGET): $(FA_SRC)
 $(KMP_TARGET): $(KMP_SRC)
 	$(CXX) $^ -o $@
 
-run-fa: $(FA_TARGET)
+run: $(FA_TARGET)
 	$(FA_TARGET) ba cases/test1.txt
-	@echo.
-	$(FA_TARGET) baba cases/test1.txt
-	@echo.
-	$(FA_TARGET) aba cases/test1.txt
-	@echo.
-	$(FA_TARGET) ab cases/test2.txt
-	@echo.
-	$(FA_TARGET) xx cases/test2.txt
-	@echo.
-	$(FA_TARGET) abc cases/test3.txt
-	@echo.
-	$(FA_TARGET) abcdefghijk cases/test3.txt
-	@echo.
-
-run-kmp: $(KMP_TARGET)
 	$(KMP_TARGET) ba cases/test1.txt
 	@echo.
+	$(FA_TARGET) baba cases/test1.txt
 	$(KMP_TARGET) baba cases/test1.txt
 	@echo.
+	$(FA_TARGET) aba cases/test1.txt
 	$(KMP_TARGET) aba cases/test1.txt
 	@echo.
+	$(FA_TARGET) ab cases/test2.txt
 	$(KMP_TARGET) ab cases/test2.txt
 	@echo.
+	$(FA_TARGET) xx cases/test2.txt
 	$(KMP_TARGET) xx cases/test2.txt
 	@echo.
+	$(FA_TARGET) abc cases/test3.txt
 	$(KMP_TARGET) abc cases/test3.txt
 	@echo.
+	$(FA_TARGET) abcdefghijk cases/test3.txt
 	$(KMP_TARGET) abcdefghijk cases/test3.txt
-
-	
+	@echo.	
 
 clean:
 	rm -f $(BUILD_DIR)/*.exe
