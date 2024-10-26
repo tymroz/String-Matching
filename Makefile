@@ -37,7 +37,4 @@ run: $(FA_TARGET)
 	@echo.
 	$(FA_TARGET) abcdefghijk cases/test3.txt
 	$(KMP_TARGET) abcdefghijk cases/test3.txt
-	@echo.	
-
-clean:
-	rm -f $(BUILD_DIR)/*.exe
+	@echo.
